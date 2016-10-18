@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
+"""Import moduels"""
 import sys
-from Bio.Seq import translate
 from Bio import AlignIO
 from Bio.Seq import Seq
 input_file = sys.argv[1]
@@ -16,7 +16,6 @@ individuals = len(alignment)
 outgroup_aln = alignment[individuals-outgroup_n:individuals]
 ingroup_aln = alignment[0:(individuals - outgroup_n)]
 
-print(outgroup_aln)
 polysites = {}
 for site in range(0, total_len):
     nucs = {}
@@ -70,7 +69,7 @@ for sites in polysites:
                     codon = str(record.seq[codon_start:codon_end])
                     if codon not in tmp_codons and 'N' not in codon and '-' not in codon:
                         tmp_codons_out[codon] = 1
-                tmp_aa_out={}
+                tmp_aa_out = {}
                 for i in tmp_codons_out:
                     aa = str(Seq(str(i)).translate())
                     if aa not in tmp_aa_out:
@@ -85,7 +84,7 @@ for sites in polysites:
                             else:
                                 ps += 1
                 else: #this is fixed within the outgroup
-                    if (len(list(set(tmp_aa.keys() + tmp_aa_out.keys())))) >1:
+                    if (len(list(set(tmp_aa.keys() + tmp_aa_out.keys())))) > 1:
                         dn += 1
                     else:
                         ds += 1
